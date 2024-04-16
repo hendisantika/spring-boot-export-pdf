@@ -6,6 +6,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * Created by IntelliJ IDEA.
  * Project : spring-boot-export-pdf
@@ -25,5 +27,10 @@ public class StudentService {
     public void addStudent(Student student) {
         log.info("Add new student data ... ");
         studentRepository.save(student);
+    }
+
+    public List<Student> getStudentList() {
+        log.info("List all students data ... ");
+        return studentRepository.findAll();
     }
 }
