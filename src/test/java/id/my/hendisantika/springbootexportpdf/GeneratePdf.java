@@ -1,11 +1,15 @@
 package id.my.hendisantika.springbootexportpdf;
 
+import com.itextpdf.html2pdf.HtmlConverter;
 import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfReader;
 import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.layout.Document;
 import com.itextpdf.layout.element.Paragraph;
 import org.junit.jupiter.api.Test;
+
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 
 /**
  * Created by IntelliJ IDEA.
@@ -63,6 +67,20 @@ public class GeneratePdf {
             // Close the Document to complete the PDF writing
             document.close();
 
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void HTMLToPDF() {
+        // Define the source of html file and output file
+        String inputPath = System.getProperty("user.dir") + "/files/source.html";
+        String outputPath = System.getProperty("user.dir") + "/files/converted.pdf";
+
+        try {
+            // Converting file from html to pdf
+            HtmlConverter.convertToPdf(new FileInputStream(inputPath), new FileOutputStream(outputPath));
         } catch (Exception e) {
             e.printStackTrace();
         }
