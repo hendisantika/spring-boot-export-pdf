@@ -9,7 +9,9 @@ import com.itextpdf.layout.element.Paragraph;
 import org.junit.jupiter.api.Test;
 
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
 
 /**
  * Created by IntelliJ IDEA.
@@ -22,6 +24,10 @@ import java.io.FileOutputStream;
  * To change this template use File | Settings | File Templates.
  */
 public class GeneratePdf {
+    public static final String HTML = "<h1>Hello</h1>"
+            + "<p>This was created using iText</p>"
+            + "<a href='https://s.id/hendisantika'>Hendi Santika</a>";
+
     @Test
     public void addPDF() {
         // Define the path for the output PDF file
@@ -81,6 +87,21 @@ public class GeneratePdf {
         try {
             // Converting file from html to pdf
             HtmlConverter.convertToPdf(new FileInputStream(inputPath), new FileOutputStream(outputPath));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void HTMLToPDF2() throws IOException {
+        String inputPath = System.getProperty("user.dir") + "/files/source2.html";
+        String outputPath = System.getProperty("user.dir") + "/files/converted2.pdf";
+
+        try {
+            // Converting file from html to pdf
+            HtmlConverter.convertToPdf(HTML, new FileOutputStream("string-to-pdf.pdf"));
+//            HtmlConverter.convertToPdf(new FileInputStream(inputPath), new FileOutputStream(outputPath));
+            System.out.println("PDF Created!");
         } catch (Exception e) {
             e.printStackTrace();
         }
